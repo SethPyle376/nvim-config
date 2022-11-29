@@ -27,3 +27,5 @@ vim.keymap.set('n', "<leader>ft", ":FloatermNew --name=myfloat --height=0.8 --wi
 vim.keymap.set('n', "t", ":FloatermToggle myfloat<CR>")
 vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 vim.keymap.set('n', "<leader>rf", ":RustFmt<CR>")
+
+vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
