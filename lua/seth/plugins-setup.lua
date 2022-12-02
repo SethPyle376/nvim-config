@@ -97,4 +97,25 @@ return packer.startup(function(use)
 
   use("ggandor/leap.nvim")
   use("rust-lang/rust.vim")
+  use {'stevearc/overseer.nvim',
+    config = function() require('overseer').setup() end
+  }
+
+  use {
+    'amirali/yapf.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function()
+      require('yapf').setup {
+                style = '{based_on_style: yapf}'
+            }
+    end,
+  }
+
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+
 end)
