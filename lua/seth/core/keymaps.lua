@@ -29,3 +29,19 @@ vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 vim.keymap.set('n', "<leader>rf", ":RustFmt<CR>")
 
 vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+
+vim.keymap.set("n", "<leader>br", ":call vimspector#ToggleBreakpoint()<CR>")
+vim.keymap.set("n", "<leader>aw", ":call vimspector#AddWatch()<CR>")
+vim.keymap.set("n", "<leader>ev", ":call vimspector#Evaluate()<CR>")
+
+vim.cmd([[
+nmap <F5> <cmd>call vimspector#Launch()<cr>
+nmap <F6> <cmd>call vimspector#Continue()<cr>
+nmap <F9> <cmd>call vimspector#StepOver()<cr>
+nmap <F9> <cmd>call vimspector#StepOver()<cr>
+nmap <F8> <cmd>call vimspector#Reset()<cr>
+nmap <F11> <cmd>call vimspector#StepOver()<cr>")
+nmap <F12> <cmd>call vimspector#StepOut()<cr>")
+nmap <F10> <cmd>call vimspector#StepInto()<cr>")
+]])
+

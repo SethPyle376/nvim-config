@@ -118,4 +118,6 @@ return packer.startup(function(use)
     end
   }
 
+  use ('puremourning/vimspector')
+
 end)
