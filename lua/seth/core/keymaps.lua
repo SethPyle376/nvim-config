@@ -23,7 +23,9 @@ vim.keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>ef", ":NvimTreeFocus<CR>")
 
-vim.keymap.set('n', "<leader>ft", ":FloatermNew --name=myfloat --height=0.8 --width=0.7 --autoclose=2 fish <CR> ")
+vim.keymap.set('n', "<leader>ft", ":FloatermNew <CR>")
+vim.keymap.set('n', "<leader>fn", ":FloatermNext <CR>")
+vim.keymap.set('n', "<leader>t", ":FloatermPrev <CR>")
 vim.keymap.set('n', "t", ":FloatermToggle myfloat<CR>")
 vim.keymap.set('t', "<Esc>", "<C-\\><C-n>:q<CR>")
 vim.keymap.set('n', "<leader>rf", ":RustFmt<CR>")
@@ -33,6 +35,10 @@ vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_gre
 vim.keymap.set("n", "<leader>br", ":call vimspector#ToggleBreakpoint()<CR>")
 vim.keymap.set("n", "<leader>aw", ":call vimspector#AddWatch()<CR>")
 vim.keymap.set("n", "<leader>ev", ":call vimspector#Evaluate()<CR>")
+
+vim.keymap.set("n", "<leader>bp", ":BufferPick<CR>")
+vim.keymap.set("n", "<leader>h", ":BufferPrevious<CR>")
+vim.keymap.set("n", "<leader>l", ":BufferNext<CR>")
 
 vim.cmd([[
 nmap <F5> <cmd>call vimspector#Launch()<cr>

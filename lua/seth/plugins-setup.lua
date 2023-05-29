@@ -69,7 +69,10 @@ return packer.startup(function(use)
   use("neovim/nvim-lspconfig")
 
   use("hrsh7th/cmp-nvim-lsp")
-  use({"glepnir/lspsaga.nvim", branch = "main"})
+  use {
+    'glepnir/lspsaga.nvim',
+    commit = 'ae099d5844b005cec66a66ab30a44d3bf8867af9',
+  }
   use("onsails/lspkind.nvim")
 
   use({
@@ -120,4 +123,13 @@ return packer.startup(function(use)
 
   use ('puremourning/vimspector')
 
+  use 'andweeb/presence.nvim'
+  use 'f-person/auto-dark-mode.nvim'
+  use "terrortylor/nvim-comment"
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup {
+        open_mapping = [[<c-t>]],
+        direction = 'horizontal'
+    }
+  end}
 end)

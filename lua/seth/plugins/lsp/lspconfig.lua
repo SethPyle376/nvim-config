@@ -41,3 +41,6 @@ require('lspconfig')['pyright'].setup{
     flags = lsp_flags,
 }
 
+require'lspconfig'.omnisharp.setup{}
+
+require('lspconfig').volar.setup{}
