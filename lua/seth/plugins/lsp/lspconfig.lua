@@ -41,6 +41,10 @@ require('lspconfig')['pyright'].setup{
     flags = lsp_flags,
 }
 
-require'lspconfig'.omnisharp.setup{}
+-- require'lspconfig'.omnisharp.setup{}
 
-require('lspconfig').volar.setup{}
+require'lspconfig'.csharp_ls.setup{}
+
+require('lspconfig').volar.setup{
+  on_attach = on_attach
+}
