@@ -15,7 +15,8 @@ treesitter.setup({
     "gitignore",
     "lua",
     "vim",
-    "yaml"
+    "yaml",
+    "java"
   },
   auto_install = true
 })

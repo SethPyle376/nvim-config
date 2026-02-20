@@ -30,7 +30,9 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   
   -- Gruvbox
-  use("ellisonleao/gruvbox.nvim")
+  -- use("ellisonleao/gruvbox.nvim")
+  use("sainnhe/everforest")
+  use("sainnhe/gruvbox-material")
 
   -- Window Movement
   use("christoomey/vim-tmux-navigator")
@@ -107,6 +109,8 @@ return packer.startup(function(use)
     config = function() require('overseer').setup() end
   }
 
+  -- use 'mfussenegger/nvim-jdtls'
+
   use {
     'amirali/yapf.nvim',
     requires = {'nvim-lua/plenary.nvim'},
@@ -126,6 +130,20 @@ return packer.startup(function(use)
 
   -- use ('puremourning/vimspector')
 
+  use('JavaHello/spring-boot.nvim')
+  use ('MunifTanjim/nui.nvim')
+  use ('mfussenegger/nvim-dap')
+  use('nvim-java/nvim-java')
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
+  use {
+    "ray-x/lsp_signature.nvim",
+  }
+  use 'karb94/neoscroll.nvim'
+  use 'stevearc/conform.nvim'
+
+  use 'nvim-lua/plenary.nvim'
+  use 'CopilotC-Nvim/CopilotChat.nvim'
+
   use 'andweeb/presence.nvim'
   use 'f-person/auto-dark-mode.nvim'
   use "terrortylor/nvim-comment"
@@ -136,3 +154,4 @@ return packer.startup(function(use)
     }
   end}
 end)
+

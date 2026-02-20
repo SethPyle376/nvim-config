@@ -13,6 +13,12 @@ vim.keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
 vim.keymap.set("n", "<leader>eq", "<C-w>=") -- make split windows equal width
 vim.keymap.set("n", "<leader>cl", ":close<CR>") -- close current window
 
+-- window resizing
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]])
+
 -- tabs
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>") -- new tab
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>") -- close tab
@@ -32,22 +38,36 @@ vim.keymap.set('n', "<leader>rf", ":RustFmt<CR>")
 
 vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
-vim.keymap.set("n", "<leader>br", ":call vimspector#ToggleBreakpoint()<CR>")
-vim.keymap.set("n", "<leader>aw", ":call vimspector#AddWatch()<CR>")
-vim.keymap.set("n", "<leader>ev", ":call vimspector#Evaluate()<CR>")
+vim.keymap.set("n", "<leader>cp", ":CopilotChatToggle<CR>")
+
+-- vim.keymap.set("n", "<leader>br", ":call vimspector#ToggleBreakpoint()<CR>")
+-- vim.keymap.set("n", "<leader>aw", ":call vimspector#AddWatch()<CR>")
+-- vim.keymap.set("n", "<leader>ev", ":call vimspector#Evaluate()<CR>")
 
 vim.keymap.set("n", "<leader>bp", ":BufferPick<CR>")
 vim.keymap.set("n", "<leader>h", ":BufferPrevious<CR>")
 vim.keymap.set("n", "<leader>l", ":BufferNext<CR>")
+vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 
-vim.cmd([[
-nmap <F5> <cmd>call vimspector#Launch()<cr>
-nmap <F6> <cmd>call vimspector#Continue()<cr>
-nmap <F9> <cmd>call vimspector#StepOver()<cr>
-nmap <F9> <cmd>call vimspector#StepOver()<cr>
-nmap <F8> <cmd>call vimspector#Reset()<cr>
-nmap <F11> <cmd>call vimspector#StepOver()<cr>")
-nmap <F12> <cmd>call vimspector#StepOut()<cr>")
-nmap <F10> <cmd>call vimspector#StepInto()<cr>")
-]])
+vim.keymap.set("n", "<leader>br", ":DapToggleBreakpoint<CR>")
+vim.keymap.set({ 'n' }, '<Leader>k', function()
+     vim.lsp.buf.signature_help()
+    end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+-- Java Stuff
+vim.keymap.set("n", "<leader>jtm", ":JavaTestRunCurrentMethod<CR>")
+vim.keymap.set("n", "<leader>jtc", ":JavaTestRunCurrentClass<CR>")
+vim.keymap.set("n", "<leader>jtd", ":JavaTestDebugCurrentMethod<CR>")
+vim.keymap.set("n", "<leader>jtr", ":JavaTestViewLastReport<CR>")
+
+-- vim.cmd([[
+-- nmap <F5> <cmd>call vimspector#Launch()<cr>
+-- nmap <F6> <cmd>call vimspector#Continue()<cr>
+-- nmap <F9> <cmd>call vimspector#StepOver()<cr>
+-- nmap <F9> <cmd>call vimspector#StepOver()<cr>
+-- nmap <F8> <cmd>call vimspector#Reset()<cr>
+-- nmap <F11> <cmd>call vimspector#StepOver()<cr>")
+-- nmap <F12> <cmd>call vimspector#StepOut()<cr>")
+-- nmap <F10> <cmd>call vimspector#StepInto()<cr>")
+-- ]])
 

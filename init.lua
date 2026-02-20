@@ -17,5 +17,13 @@ require("seth.plugins.overseer")
 require("seth.plugins.yapf")
 require("seth.plugins.comment")
 require("seth.plugins.presence")
-require("seth.plugins.auto-dark-mode")
+-- require("seth.plugins.auto-dark-mode")
 require("seth.plugins.barbar")
+require("seth.plugins.java")
+require("seth.plugins.dap")
+require("seth.plugins.neoscroll")
+require("seth.plugins.copilot")
+require("seth.plugins.conform")
+
+-- vim.g.vimspector_enable_mappings = 'HUMAN'
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
