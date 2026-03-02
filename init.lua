@@ -10,7 +10,6 @@ require("seth.plugins.lsp.lspconfig")
 require("seth.plugins.autopairs")
 require("seth.plugins.treesitter")
 require("seth.plugins.gitsigns")
-require("seth.plugins.indent-blankline")
 require("seth.plugins.telescope")
 require("seth.plugins.leap")
 require("seth.plugins.overseer")
@@ -24,6 +23,10 @@ require("seth.plugins.dap")
 require("seth.plugins.neoscroll")
 require("seth.plugins.copilot")
 require("seth.plugins.conform")
+require("seth.plugins.snacks")
+require("seth.plugins.sidekick")
 
 -- vim.g.vimspector_enable_mappings = 'HUMAN'
-vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
+if vim.fn.executable("python3") == 1 then
+  vim.g.python3_host_prog = vim.fn.exepath("python3")
+end

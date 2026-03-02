@@ -49,7 +49,6 @@ vim.keymap.set("n", "<leader>h", ":BufferPrevious<CR>")
 vim.keymap.set("n", "<leader>l", ":BufferNext<CR>")
 vim.keymap.set("n", "<leader>q", ":bp<bar>sp<bar>bn<bar>bd<CR>")
 
-vim.keymap.set("n", "<leader>br", ":DapToggleBreakpoint<CR>")
 vim.keymap.set({ 'n' }, '<Leader>k', function()
      vim.lsp.buf.signature_help()
     end, { silent = true, noremap = true, desc = 'toggle signature' })
@@ -70,4 +69,3 @@ vim.keymap.set("n", "<leader>jtr", ":JavaTestViewLastReport<CR>")
 -- nmap <F12> <cmd>call vimspector#StepOut()<cr>")
 -- nmap <F10> <cmd>call vimspector#StepInto()<cr>")
 -- ]])
-

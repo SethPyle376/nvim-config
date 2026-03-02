@@ -5,10 +5,13 @@ end
 
 treesitter.setup({
   highlight = {
-    enable = true
+    enable = true,
   },
   indent = { enable = true },
+  sync_install = false,
   ensure_installed = {
+    "c",
+    "cpp",
     "sql",
     "rust",
     "python",
@@ -16,7 +19,7 @@ treesitter.setup({
     "lua",
     "vim",
     "yaml",
-    "java"
+    "java",
   },
-  auto_install = true
+  auto_install = false,
 })

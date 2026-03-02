@@ -1,157 +1,137 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
 end
-local packer_bootstrap = ensure_packer() -- true if packer was just installed
+vim.opt.rtp:prepend(lazypath)
 
--- autocommand that reloads neovim and installs/updates/removes plugins
--- when file is saved
-vim.cmd([[ 
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
-  augroup end
-]])
+require("lazy").setup({
 
--- import packer safely
-local status, packer = pcall(require, "packer")
-if not status then
-	return
-end
+	-- Colorschemes
+	-- "ellisonleao/gruvbox.nvim",
+	"sainnhe/everforest",
+	"sainnhe/gruvbox-material",
 
-return packer.startup(function(use)
-  -- Packer
-  use("wbthomason/packer.nvim")
-  
-  -- Gruvbox
-  -- use("ellisonleao/gruvbox.nvim")
-  use("sainnhe/everforest")
-  use("sainnhe/gruvbox-material")
+	-- Window movement
+	"christoomey/vim-tmux-navigator",
 
-  -- Window Movement
-  use("christoomey/vim-tmux-navigator")
+	"nvim-lua/plenary.nvim",
 
-  use("nvim-lua/plenary.nvim")
+	"nvim-tree/nvim-tree.lua",
+	"kyazdani42/nvim-web-devicons",
+	"nvim-lualine/lualine.nvim",
 
-  use("nvim-tree/nvim-tree.lua")
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-telescope/telescope-live-grep-args.nvim",
+		},
+		config = function()
+			require("telescope").load_extension("live_grep_args")
+		end,
+	},
 
-  use("kyazdani42/nvim-web-devicons")
+	"hrsh7th/nvim-cmp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
 
-  use("nvim-lualine/lualine.nvim") 
+	"L3MON4D3/LuaSnip",
+	"saadparwaiz1/cmp_luasnip",
+	"rafamadriz/friendly-snippets",
 
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
- 
-  use {
-    "nvim-telescope/telescope.nvim",
-    requires = {
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-    },
-    config = function()
-      require("telescope").load_extension("live_grep_args")
-    end
-  }
+	"williamboman/mason.nvim",
+	"williamboman/mason-lspconfig.nvim",
+	"neovim/nvim-lspconfig",
 
+	"hrsh7th/cmp-nvim-lsp",
+	{
+		"nvimdev/lspsaga.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function()
+			require("lspsaga").setup({})
+		end,
+	},
+	"onsails/lspkind.nvim",
 
-  use("hrsh7th/nvim-cmp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-path")
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+	},
 
-  use("L3MON4D3/LuaSnip")
-  use("saadparwaiz1/cmp_luasnip")
-  use("rafamadriz/friendly-snippets")
+	"windwp/nvim-autopairs",
+	"windwp/nvim-ts-autotag",
 
-  use("williamboman/mason.nvim")
-  use("williamboman/mason-lspconfig.nvim")
-  use("neovim/nvim-lspconfig")
+	"voldikss/vim-floaterm",
+	"romgrk/barbar.nvim",
+	"lewis6991/gitsigns.nvim",
 
-  use("hrsh7th/cmp-nvim-lsp")
-  use ({
-      'nvimdev/lspsaga.nvim',
-      after = 'nvim-lspconfig',
-      config = function()
-          require('lspsaga').setup({})
-      end,
-  })
-  use("onsails/lspkind.nvim")
+	{
+		"goolord/alpha-nvim",
+		config = function()
+			require("alpha").setup(require("alpha.themes.dashboard").config)
+		end,
+	},
 
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end
-  })
+	{ url = "https://codeberg.org/andyg/leap.nvim" },
+	"rust-lang/rust.vim",
+	{
+		"stevearc/overseer.nvim",
+		config = function()
+			require("overseer").setup()
+		end,
+	},
 
-  use("windwp/nvim-autopairs")
-  use("windwp/nvim-ts-autotag")
+	-- "mfussenegger/nvim-jdtls",
 
-  use("voldikss/vim-floaterm")
-  use("romgrk/barbar.nvim")
-  use("lewis6991/gitsigns.nvim")
- 
-  use("lukas-reineke/indent-blankline.nvim")
+	{
+		"amirali/yapf.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("yapf").setup({
+				style = "{based_on_style: yapf}",
+			})
+		end,
+	},
 
-  use {
-    'goolord/alpha-nvim',
-    config = function ()
-        require'alpha'.setup(require'alpha.themes.dashboard'.config)
-    end
-  }
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	},
 
-  use("ggandor/leap.nvim")
-  use("rust-lang/rust.vim")
-  use {'stevearc/overseer.nvim',
-    config = function() require('overseer').setup() end
-  }
+	-- "puremourning/vimspector",
 
-  -- use 'mfussenegger/nvim-jdtls'
-
-  use {
-    'amirali/yapf.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
-    config = function()
-      require('yapf').setup {
-                style = '{based_on_style: yapf}'
-            }
-    end,
-  }
-
-  use {
-    'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end
-  }
-
-  -- use ('puremourning/vimspector')
-
-  use('JavaHello/spring-boot.nvim')
-  use ('MunifTanjim/nui.nvim')
-  use ('mfussenegger/nvim-dap')
-  use('nvim-java/nvim-java')
-  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
-  use {
-    "ray-x/lsp_signature.nvim",
-  }
-  use 'karb94/neoscroll.nvim'
-  use 'stevearc/conform.nvim'
-
-  use 'nvim-lua/plenary.nvim'
-  use 'CopilotC-Nvim/CopilotChat.nvim'
-
-  use 'andweeb/presence.nvim'
-  use 'f-person/auto-dark-mode.nvim'
-  use "terrortylor/nvim-comment"
-  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm").setup {
-        open_mapping = [[<c-t>]],
-        direction = 'horizontal'
-    }
-  end}
-end)
-
+	"JavaHello/spring-boot.nvim",
+	"MunifTanjim/nui.nvim",
+	"mfussenegger/nvim-dap",
+	"nvim-java/nvim-java",
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+	"ray-x/lsp_signature.nvim",
+	"karb94/neoscroll.nvim",
+	"stevearc/conform.nvim",
+	"CopilotC-Nvim/CopilotChat.nvim",
+	{ "folke/snacks.nvim", lazy = false, priority = 1000 },
+	"folke/sidekick.nvim",
+	
+	"andweeb/presence.nvim",
+	"f-person/auto-dark-mode.nvim",
+	"terrortylor/nvim-comment",
+	{
+		"akinsho/toggleterm.nvim",
+		tag = "*",
+		config = function()
+			require("toggleterm").setup({
+				open_mapping = [[<c-t>]],
+				direction = "horizontal",
+			})
+		end,
+	},
+})
